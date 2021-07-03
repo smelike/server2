@@ -102,3 +102,13 @@ body
     color: $gray5;
   }
 }
+
+.code-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  .subtitle {
+    margin-top: 30px;
+  }
+}
