@@ -10,6 +10,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var systemRouter = require('./routes/system');
+var messageRouter = require('./routes/message');
 
 var app = express();
 app.use(cors())
@@ -22,9 +24,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var asyncRedis = require('async-redis');
+const redis = asyncRedis.createClient({"host":process.env.REDIS_HOST});
+app.use(function(req, res, next) {
+  req.redis = redis;
+  next();
+});
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', systemRouter);
+
+async function checkLevel( req, res, next )
+{
+  const token = req.query.token || req.body.token;
+  const raw = await req.redis.get('session/'+token);
+  const user_data = JSON.parse(raw);
+  if( !user_data || user_data.level < 1 )
+  {
+    // 权限错误
+    throw new Error("错误的 Token 或者用户权限不足 ");
+  }
+  else
+  {
+    req.session = user_data;
+    next();
+  }
+}
+
+app.use('/user', checkLevel, usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -13,7 +13,7 @@ export default class SoloLayout extends Component
     render()
     {
         const main = this.props.children ? this.props.children : null;
-        const title = this.props.title || "Server将2.0";
+        const title = this.props.title || "思考空气|2.0";
         return <DocumentTitle title={title}>
             <>
                 <TopNav />

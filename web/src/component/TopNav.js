@@ -14,7 +14,7 @@ export default class TopNav extends Component
         return <div className="top-nav">
             <div className="container">
                 <div className="left">
-                    <div className="logo"><h2>Server将</h2></div>
+                    <div className="logo"><h2>思考空气</h2></div>
                     <TopMenu />
                 </div>
                 <div className="right">
