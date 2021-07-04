@@ -10,7 +10,8 @@ const { route } = require('.');
 const wechat_config = {
   token: process.env.WX_TOKEN,
   appid: process.env.WX_APPID,
-  encodingAESKey: process.env.WX_AESKEY
+  encodingAESKey: process.env.WX_AESKEY,
+  checkSignature: false
 }
 
 /* 获取微信登入的二维码. */
@@ -33,4 +34,16 @@ router.get('/qrcode', async function(req, res, next) {
   res.json( qrdata );
 });
 
+// 接口配置信息 正确响应微信发送的Token验证
+/*
+router.all('/wechat/callback', async (req, res, next) => {
+  
+  console.log(req.query);
+  res.send(req.query.echostr);
+})
+*/
+router.all('/wechat/callback', Wechat( wechat_config, async (req, res, next) => {
+
+  console.log(req.weixin);
+}));
 module.exports = router;
