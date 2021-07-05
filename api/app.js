@@ -47,7 +47,7 @@ async function checkLevel( req, res, next )
   else
   {
     req.session = user_data;
-    next();
+    next();// 调用路由的下一个流程
   }
 }
 

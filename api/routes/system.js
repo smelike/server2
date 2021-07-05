@@ -17,7 +17,7 @@ const wechat_config = {
 /* 监听前端页面请求：获取微信登入的二维码. */
 router.get('/qrcode', async function(req, res, next) {
   // 首先通过 uuid 生成一个唯一的 session id 
-  const session_id = 'sc2-'+uuid.v1();
+  const session_id = 'sc2-'+ uuid.v1();
 
   // 然后将用户的 level 设置为 0
   const user_info = {"token":session_id,"level":0};
@@ -53,10 +53,10 @@ router.post( '/wechat/callback' , Wechat( wechat_config , async (req, res, next 
     {
       const orm = require("../lib/MysqlORM");
       const user_info = {"openid":openid,"session_id":session_id,"nickname":user.nickname,"headimgurl":user.headimgurl};
-      console.log(user_info);
+      // console.log(user_info);
       const user_line = await orm.models.User.upsert( user_info);
-      
       // 然后将 user信息放入 redis
+      await orm.models.User.sync();
       req.redis.set('session/'+session_id , JSON.stringify(await orm.models.User.findOne({"where":{"id":user_line[0].dataValues.id}})));
 
       // 发送扫码成功提示
@@ -65,7 +65,6 @@ router.post( '/wechat/callback' , Wechat( wechat_config , async (req, res, next 
     else
     res.reply("出现错误，请稍后再试");
   }
-  
-
 }));
+
 module.exports = router;

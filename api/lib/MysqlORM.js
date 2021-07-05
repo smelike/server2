@@ -127,5 +127,4 @@ sequelize.define('User', {
     await sequelize.models.Push.sync();
 })();
 
-
 module.exports =  sequelize;
