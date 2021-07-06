@@ -28,8 +28,6 @@ export default class UserAvatar extends Component
     
     render()
     {
-        return <div class="user-avatar">
-            <img src={this.props.data.headimgurl} /> {this.props.data.nickname}
-        </div>;
+        return <div className="user-avatar"><img src={this.props.data.headimgurl} /></div>;
     }
 }
