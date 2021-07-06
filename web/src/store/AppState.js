@@ -18,8 +18,8 @@ async function my_post( url , params )
 
 class AppState
 {
-    api_base = 'http://127.0.0.1:8080';
-    @observable appname = "EasyStarter";
+    
+    @observable appname = "Easy-Starter";
     @observable top_menu_items = [
         {"text": "首页", "link": "/"},
         {"text": "SendKey", "link": "/sendkey"},
@@ -30,10 +30,15 @@ class AppState
     @observable user = false;    
     fields_to_save = ['user','token']; 
     
+    constructor()
+    {
+        this.load_vars();
+    }
+    
     async get_qrcode()
     {
         // 向服务器的 express 发送【微信扫码登录请求】
-        const {data} = await axios.get(this.api_base + '/qrcode');
+        const {data} = await axios.get(API_BASE + '/qrcode');
         return data || false;
     }
 
@@ -45,12 +50,23 @@ class AppState
         return await my_post( '/user/self', params );
     }
 
+
     @action set_var( field , value )
     {
         this[field] = value;
         if( this.fields_to_save.includes(field) ) this.save_vars();
     }
 
+    @action load_vars()
+    {
+        const saved = window.localStorage.getItem('SC2_SAVED');
+        if (saved) {
+            const data = JSON.parse(saved);
+            this.fields_to_save.forEach(field  => {
+                this[field] = data[field];
+            });
+        }
+    }
     @action save_vars()
     {
         let data = {};

@@ -54,6 +54,7 @@ body
 .top-menu {
   display: flex;
   flex-direction: row;
+  align-items: center;
   > * {
     margin-right: 20px;
     a {
@@ -110,5 +111,13 @@ body
   margin-top: 50px;
   .subtitle {
     margin-top: 30px;
+  }
+}
+
+.user-avatar {
+  img {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 100%;
   }
 }
