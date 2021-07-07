@@ -11,6 +11,13 @@ import { Button,Popover, Menu, MenuItem, MenuDivider } from '@blueprintjs/core';
 export default class UserMenu extends Component
 {
 
+    logout()
+    {
+        // 跳转到 login 页面
+        this.props.history.push('/login');
+        // 登录用户资料清空
+        this.props.store.set_var('user', null);
+    }
     render()
     {
         return <div className="top-menu">
