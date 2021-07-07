@@ -55,7 +55,7 @@ class AppState
         var params = new URLSearchParams();
         params.append("token", this.token);
     
-        const { data } = await axios.post(this.api_base + '/user/makekey', params);
+        const { data } = await axios.post(API_BASE + '/user/makekey', params);
         return data || false;
     }
 

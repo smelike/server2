@@ -16,6 +16,9 @@ export default class SendKey extends Component
         if ( confirm ) {
             if (!window.confirm('是否重新生成 sendkey')) return false;
             const ret = await this.props.store.make_key();
+            if (ret || ret.sendkey) {
+                this.props.store.set_var("user", ret);
+            }
             console.log(ret);
         }
     }
