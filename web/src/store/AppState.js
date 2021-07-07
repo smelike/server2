@@ -34,7 +34,7 @@ class AppState
     {
         this.load_vars();
     }
-    
+
     async get_qrcode()
     {
         // 向服务器的 express 发送【微信扫码登录请求】
@@ -50,6 +50,14 @@ class AppState
         return await my_post( '/user/self', params );
     }
 
+    async make_key()
+    {
+        var params = new URLSearchParams();
+        params.append("token", this.token);
+    
+        const { data } = await axios.post(this.api_base + '/user/makekey', params);
+        return data || false;
+    }
 
     @action set_var( field , value )
     {

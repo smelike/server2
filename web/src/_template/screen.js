@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { observer , inject } from 'mobx-react';
 import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import DocumentTitle from 'react-document-title';
+// import DocumentTitle from 'react-document-title';
+import SoloLayout from '../component/SoloLayout';
 
 @withRouter
 @inject("store")
@@ -22,6 +23,6 @@ export default class ClassNamePlaceHolder extends Component
     render()
     {
         const main = <div>ClassNamePlaceHolder</div>;
-        return <DocumentTitle title={this.props.store.appname}>{main}</DocumentTitle>;
+        return <SoloLayout title={this.props.store.appname}>{main}</SoloLayout>;
     }
 }
