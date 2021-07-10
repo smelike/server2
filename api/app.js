@@ -33,6 +33,7 @@ app.use(function(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/', systemRouter);
+app.use('/', messageRouter);
 
 async function checkLevel( req, res, next )
 {
