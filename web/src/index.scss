@@ -141,3 +141,35 @@ body
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+.result
+{
+  font-family: 'Source code pro','Courier New', Courier, monospace;
+  word-wrap: break-word;
+  text-align:justify;
+}
+
+.push-page
+{
+  .title
+  {
+    font-size: 20px;
+  }
+  .desp
+  {
+    margin-top: 20px;
+    font-size: 16px;
+    color: $gray1;
+  }
+}
+
+.sendkey-page
+{
+  .preview
+  {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding:10px;
+    border: 1px dashed #eee;
+  }
+}

@@ -50,6 +50,14 @@ class AppState
         return await my_post( '/user/self', params );
     }
 
+    // 发送测试推送
+    async send_test( sendkey, title, desp )
+    {
+        var params = new URLSearchParams();
+        params.append("title", title);
+        params.append("desp", desp);
+        return await my_post('/' + sendkey + '.send', params);
+    }
     async make_key()
     {
         var params = new URLSearchParams();

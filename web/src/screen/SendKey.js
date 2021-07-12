@@ -18,6 +18,13 @@ export default class SendKey extends Component
     async send() {
 
     }
+
+    change( e, field )
+    {
+        let o = {};
+        o[field] = e.target.value;
+        this.setState(o);
+    }
     async make_key( confirm = false)
     {
         if ( confirm ) {
